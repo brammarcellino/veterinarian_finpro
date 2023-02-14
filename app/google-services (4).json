@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "768119563349",
+    "project_id": "veterinarianproject-f5146",
+    "storage_bucket": "veterinarianproject-f5146.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:768119563349:android:7ff2a4e587ef3db8f760dc",
+        "android_client_info": {
+          "package_name": "com.example.veterinarian_finpro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "768119563349-2r46tb818p815o54cu983038830l35hu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8-n0r97yTm-mB2Cm2kl-zYJw_FdnfB7w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "768119563349-2r46tb818p815o54cu983038830l35hu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
