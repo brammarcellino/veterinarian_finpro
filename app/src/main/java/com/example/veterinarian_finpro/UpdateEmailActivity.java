@@ -52,7 +52,7 @@ public class UpdateEmailActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         firebaseUser = auth.getCurrentUser();
 
-        usernewemail = firebaseUser.getEmail();
+        useroldemail = firebaseUser.getEmail();
         TextView textviewoldEmail = findViewById(R.id.textView_update_email_old);
         textviewoldEmail.setText(useroldemail);
 

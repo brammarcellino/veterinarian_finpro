@@ -97,10 +97,10 @@ public class RegiterActivity extends AppCompatActivity {
                 String textmobile = EditTextRegisterMobile.getText().toString();
                 String textpwd = EditTextRegisterPwd.getText().toString();
                 String textconfirmpwd = editTextregisterConfirmPwd.getText().toString();
-                String textDoB = EditTextRegisterDob.getText().toString();
+                String textDob = EditTextRegisterDob.getText().toString();
                 String textgender;
 
-                String mobileRegex = "[6-9][0-9]{9}";
+                String mobileRegex = "[6-9][0-12]{12}";
                 Matcher mobilematcher;
                 Pattern pattern  = Pattern.compile(mobileRegex);
                 mobilematcher = pattern.matcher(textmobile);
@@ -110,6 +110,7 @@ public class RegiterActivity extends AppCompatActivity {
                     Toast.makeText(RegiterActivity.this, "please enter your name", Toast.LENGTH_SHORT).show();
                 editTextRegistername.setError("name is required");
                 editTextRegistername.requestFocus();
+
                 }else if (TextUtils.isEmpty(textemail)){
                     Toast.makeText(RegiterActivity.this, "Please enter your email", Toast.LENGTH_SHORT).show();
                     EditTextRegisterEmail.setError("Email required");
@@ -121,7 +122,7 @@ public class RegiterActivity extends AppCompatActivity {
                     EditTextRegisterEmail.setError("Email is required");
                     EditTextRegisterEmail.requestFocus();
 
-                }else if (TextUtils.isEmpty(textDoB)){
+                }else if (TextUtils.isEmpty(textDob)){
                     Toast.makeText(RegiterActivity.this, "Please your date of birth", Toast.LENGTH_SHORT).show();
                     EditTextRegisterDob.setError("Date of Birth is required");
                     EditTextRegisterDob.requestFocus();
@@ -130,11 +131,13 @@ public class RegiterActivity extends AppCompatActivity {
                     Toast.makeText(RegiterActivity.this, "Please enter your gender", Toast.LENGTH_SHORT).show();
                     radioButtonregitergender.setError("gender is required");
                     radioButtonregitergender.requestFocus();
+
                 }else if (TextUtils.isEmpty(textmobile)){
                     Toast.makeText(RegiterActivity.this, "Mobile number is required", Toast.LENGTH_SHORT).show();
+                   EditTextRegisterMobile.setError("mobile Number is Required");
                     EditTextRegisterMobile.requestFocus();
 
-                }else if (textmobile.length()!=9){
+                }else if (textmobile.length()!=12){
                     Toast.makeText(RegiterActivity.this, "please enter re-enter your mobile number", Toast.LENGTH_SHORT).show();
                     EditTextRegisterMobile.setError("Mobile number should be 10 digits");
                     EditTextRegisterMobile.requestFocus();
@@ -150,18 +153,13 @@ public class RegiterActivity extends AppCompatActivity {
                     EditTextRegisterPwd.setError("password is required");
                     EditTextRegisterPwd.requestFocus();
 
-                }else  if (!mobilematcher.find()){
-                    Toast.makeText(RegiterActivity.this, "Please enter Password", Toast.LENGTH_SHORT).show();
-                    EditTextRegisterPwd.setError("password is required");
-                    EditTextRegisterPwd.requestFocus();
-
-                }
-                else if (textpwd.length() <6 ){
+                } else if (textpwd.length() <6 ){
                     Toast.makeText(RegiterActivity.this, "password should be at least 6 digits", Toast.LENGTH_SHORT).show();
                     EditTextRegisterPwd.setError("password too weak ");
                     EditTextRegisterPwd.requestFocus();
                 } else if (TextUtils.isEmpty(textconfirmpwd)){
                     Toast.makeText(RegiterActivity.this, "password confirm is required", Toast.LENGTH_SHORT).show();
+                    editTextregisterConfirmPwd.setError("Password Confirm is Required");
                     editTextregisterConfirmPwd.requestFocus();
 
                 }else if (!textpwd.equals(textconfirmpwd)){
@@ -175,7 +173,7 @@ public class RegiterActivity extends AppCompatActivity {
                     textgender = radioButtonregitergender.getText().toString();
                     progressBar.setVisibility(View.VISIBLE);
                     
-                    registeruser(textfullname,textemail,textDoB,textmobile,textpwd,textgender);
+                    registeruser(textfullname,textemail,textDob,textmobile,textpwd,textgender);
                 }
 
 
@@ -193,7 +191,8 @@ public class RegiterActivity extends AppCompatActivity {
                     Toast.makeText(RegiterActivity.this, "User registered successfully", Toast.LENGTH_SHORT).show();
                     FirebaseUser firebaseUser = auth.getCurrentUser();
 
-                    UserDetails userDetails  = new UserDetails (textfullname,textDoB,textmobile,textgender);
+                    UserDetails userDetails  = new UserDetails (textDoB,textgender,textmobile);
+
                     firebaseUser.sendEmailVerification();
                     UserProfileChangeRequest userProfileChangeRequest= new UserProfileChangeRequest.Builder().setDisplayName(textfullname).build();
                     firebaseUser.updateProfile(userProfileChangeRequest);
@@ -203,20 +202,15 @@ public class RegiterActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-
-
                                 firebaseUser.sendEmailVerification();
                                 Toast.makeText(RegiterActivity.this, "User register Successfully .please verivy your email", Toast.LENGTH_SHORT).show();
-
-                                        /*//
-                Intent intent = new Intent(RegiterActivity.this , userprofile.class);
+                                Intent intent = new Intent(RegiterActivity.this , UserProfileActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-
                 startActivity(intent);
-                finish();//*/
-
+                finish();
                             } else  {
                                 Toast.makeText(RegiterActivity.this, "User registered failed .please verify your email", Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
                             }
                         }
                     });

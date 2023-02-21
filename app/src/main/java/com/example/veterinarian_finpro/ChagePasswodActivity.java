@@ -37,13 +37,14 @@ private String userpwdcurr;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chage_passwod);
 
-        getSupportActionBar().setTitle("Chage Password");
+        getSupportActionBar().setTitle("Change Password");
         editTextpwdnew = findViewById(R.id.editText_change_pwd_new);
         edittextpwdcurr = findViewById(R.id.editText_change_pwd_current);
         textViewauthenticated = findViewById(R.id.textView_change_pwd_authenticated);
-        getedittextconfirmnew= findViewById(R.id.editText_change_pwd_new2);
+        getedittextconfirmnew= findViewById(R.id.editText_confirm_pwd);
         progressBar = findViewById(R.id.progressBar);
         buttonchangepwd = findViewById(R.id.button_change_pwd);
+        buttonReauthenticate = findViewById(R.id.button_change_pwd_authenticate);
 
         editTextpwdnew.setEnabled(false);
         getedittextconfirmnew.setEnabled(false);
@@ -70,7 +71,7 @@ private String userpwdcurr;
             public void onClick(View v) {
                 userpwdcurr = edittextpwdcurr.getText().toString();
                 if (TextUtils.isEmpty(userpwdcurr)){
-                    Toast.makeText(ChagePasswodActivity.this, "Passwor is needed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChagePasswodActivity.this, "Password is needed", Toast.LENGTH_SHORT).show();
                     edittextpwdcurr.setError("please enter your current password to authenticate");
                     edittextpwdcurr.requestFocus();
                 } else {
@@ -128,12 +129,13 @@ private String userpwdcurr;
             Toast.makeText(ChagePasswodActivity.this, "please confim", Toast.LENGTH_SHORT).show();
             getedittextconfirmnew.setError("please enter you new password");
             getedittextconfirmnew.requestFocus();
-        } else  if (userpwdnew.matches(userpwdconfirmnew)){
+        } else  if (!userpwdnew.matches(userpwdconfirmnew)){
             Toast.makeText(ChagePasswodActivity.this, "Password did not match", Toast.LENGTH_SHORT).show();
             getedittextconfirmnew.setError("please enter your new password");
             getedittextconfirmnew.requestFocus();
-        } else if (!userpwdcurr.matches(userpwdnew)){
+        } else if (userpwdcurr.matches(userpwdnew)){
             Toast.makeText(ChagePasswodActivity.this, "New password cannot same as old password", Toast.LENGTH_SHORT).show();
+            editTextpwdnew.setError("please enter your new Password");
             editTextpwdnew.requestFocus();
         } else  {
             progressBar.setVisibility(View.VISIBLE);

@@ -129,7 +129,7 @@ private  static final  String TAG = "DeleteProofileActivity";
         builder.setPositiveButton("continue", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-               deleteuser(firebaseUser);
+               deleteUserData(firebaseUser);
             }
         });
 
@@ -153,12 +153,27 @@ private  static final  String TAG = "DeleteProofileActivity";
         });
     }
 
-    private void deleteuser(FirebaseUser firebaseUser) {
+    private void deleteuser() {
+        if (firebaseUser.getPhotoUrl()!= null){
+            FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+            StorageReference storageReference = firebaseStorage.getReferenceFromUrl(firebaseUser.getPhotoUrl().toString());
+            storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Log.d(TAG,"OnSuccess:Photo Deleted");
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d(TAG,e.getMessage());
+                    Toast.makeText(DeleteProfileActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
         firebaseUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
-                    deleteUserData();
                     auth.signOut();
                     Toast.makeText(DeleteProfileActivity.this, "user has deleted", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(DeleteProfileActivity.this,MainActivity.class);
@@ -177,7 +192,7 @@ private  static final  String TAG = "DeleteProofileActivity";
         });
     }
 
-    private void deleteUserData() {
+    private void deleteUserData(FirebaseUser firebaseUser) {
         FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
         StorageReference storageReference = firebaseStorage.getReferenceFromUrl(firebaseUser.getPhotoUrl().toString());
         storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -198,6 +213,8 @@ private  static final  String TAG = "DeleteProofileActivity";
             @Override
             public void onSuccess(Void unused) {
               Log.d(TAG,"Onsuccess:User Data Deleted") ;
+
+              deleteuser();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

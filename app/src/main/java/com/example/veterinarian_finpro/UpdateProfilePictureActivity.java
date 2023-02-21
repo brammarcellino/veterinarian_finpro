@@ -27,28 +27,33 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+
 public class UpdateProfilePictureActivity extends AppCompatActivity {
     private ProgressBar progressBar;
-    private ImageView imageView;
+    private ImageView imageViewPic;
     private FirebaseAuth auth;
     private StorageReference storageReference;
     private  FirebaseUser firebaseUser;
-    private static  final  int PICK_IMAGE_REQUEST=1;
+    private static  final  int PICK_IMAGE_REQUEST = 1;
     private Uri uriImage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_update_profile_picture);
         getSupportActionBar().setTitle("upload profile picture");
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         auth = FirebaseAuth.getInstance();
+        firebaseUser =auth.getCurrentUser();
         Button buttonloadpicture= findViewById(R.id.upload_pic_choose_button);
-        Button buttonuploadpic = findViewById(R.id.upload_pic_choose_button);
-        imageView = findViewById(R.id.imageView_profile_dp);
+        Button buttonuploadpic = findViewById(R.id.upload_pic_button);
+        imageViewPic = findViewById(R.id.imageView_profile_dp);
         progressBar = findViewById(R.id.progressBar);
         storageReference = FirebaseStorage.getInstance().getReference("DisplayPicUser");
         Uri uri = firebaseUser.getPhotoUrl();
-        Picasso.get().load(uri).into(imageView);
+        Picasso.get().load(uri).fit().into(imageViewPic);
 
 
         buttonloadpicture.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +74,8 @@ public class UpdateProfilePictureActivity extends AppCompatActivity {
 
     private void Uploadpic() {
         if (uriImage != null){
-            StorageReference fileReferance= storageReference.child(auth.getCurrentUser().getUid()+"."+getfileExtension(uriImage) );
+            StorageReference fileReferance= storageReference.child(auth.getCurrentUser().getUid()+"/displaypics."
+                    + getfileExtension(uriImage) );
             fileReferance.putFile(uriImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -116,11 +122,12 @@ public class UpdateProfilePictureActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-       if (requestCode== PICK_IMAGE_REQUEST&& requestCode==RESULT_OK&&data !=null && data.getData()!=null){
-           uriImage = data.getData();
-           imageView.setImageURI(uriImage);
-       }
         super.onActivityResult(requestCode, resultCode, data);
+       if (requestCode== PICK_IMAGE_REQUEST && requestCode==RESULT_OK && data !=null && data.getData()!=null){
+           uriImage = data.getData();
+           imageViewPic.setImageURI(uriImage);
+       }
+
     }
 
     @Override

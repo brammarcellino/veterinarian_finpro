@@ -30,6 +30,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText editTextEmail ,edittextpwd;
+    private  TextView textViewRegister;
     ProgressBar progressBar;
     private FirebaseAuth auth;
     private static  String TAG = "LoginActivate";
@@ -45,7 +46,16 @@ public class LoginActivity extends AppCompatActivity {
         editTextEmail = findViewById(R.id.editText_login_email);
         edittextpwd = findViewById(R.id.editText_login_pwd);
         progressBar = findViewById(R.id.progressBar);
+        textViewRegister= findViewById(R.id.textView_register);
+
         auth = FirebaseAuth.getInstance();
+        textViewRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(LoginActivity.this, "you can register now", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LoginActivity.this,RegiterActivity.class));
+            }
+        });
 
         TextView textViewforgetPassword = findViewById(R.id.textView_forgot_password);
         textViewforgetPassword.setOnClickListener(new View.OnClickListener() {
@@ -119,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "you are logged in now", Toast.LENGTH_SHORT).show();
 
 
-                        startActivity(new Intent(LoginActivity.this,UserProfileActivity.class));
+                        startActivity(new Intent(LoginActivity.this,HomeActivity.class));
                         finish();
                     } else {
                         firebaseUser.sendEmailVerification();
@@ -176,7 +186,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
         if (auth.getCurrentUser()!= null){
             Toast.makeText(LoginActivity.this, "Already logged in!", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(LoginActivity.this,UserDetails.class));
+        startActivity(new Intent(LoginActivity.this,UserProfileActivity.class));
         finish();
         }
         else  {

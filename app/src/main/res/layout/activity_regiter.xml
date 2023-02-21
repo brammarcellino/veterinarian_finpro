@@ -92,6 +92,7 @@
                     android:background="@android:color/transparent"
                     android:hint="enter your full name"
                     android:inputType="textPersonName"
+                    android:minHeight="48dp"
                     android:padding="6dp"
                     android:textSize="16sp" />
             </RelativeLayout>
@@ -140,8 +141,9 @@
                     android:background="@android:color/transparent"
                     android:hint="enter your email address"
                     android:inputType="textEmailAddress"
-                    android:padding="6dp"
+                    android:minHeight="48dp"
 
+                    android:padding="6dp"
                     android:textSize="16sp" />
             </RelativeLayout>
 
@@ -187,11 +189,12 @@
                     android:layout_marginBottom="10dp"
                     android:layout_toEndOf="@id/imageViewDoB"
                     android:background="@android:color/transparent"
+                    android:focusable="false"
                     android:hint="select your dob"
                     android:inputType="date"
-                    android:focusable="false"
-                    android:padding="6dp"
+                    android:minHeight="48dp"
 
+                    android:padding="6dp"
                     android:textSize="16sp" />
 
                 <ImageView
@@ -312,8 +315,9 @@
                     android:background="@android:color/transparent"
                     android:hint="enter your mobile no. (without +62)"
                     android:inputType="phone"
-                    android:padding="6dp"
+                    android:minHeight="48dp"
 
+                    android:padding="6dp"
                     android:textSize="16sp" />
             </RelativeLayout>
 
@@ -361,6 +365,7 @@
                     android:background="@android:color/transparent"
                     android:hint="enter your password"
                     android:inputType="textPassword"
+                    android:minHeight="48dp"
                     android:padding="6dp"
                     android:textSize="16sp" />
 

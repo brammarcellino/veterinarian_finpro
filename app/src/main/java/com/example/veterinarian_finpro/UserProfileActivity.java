@@ -3,6 +3,8 @@ package com.example.veterinarian_finpro;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -32,6 +34,7 @@ private ProgressBar progressBar;
 private String fullname,email,dob,gender,mobile;
 private ImageView imageView;
 private FirebaseAuth auth;
+private SwipeRefreshLayout swipeContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,8 @@ private FirebaseAuth auth;
         setContentView(R.layout.activity_user_profile);
 
         getSupportActionBar().setTitle("UserProfile");
+        
+        swipeTorefresh();
 
         textViewwelcome = findViewById(R.id.textView_show_welcome);
         textviewfulname = findViewById(R.id.textView_show_full_name);
@@ -47,6 +52,8 @@ private FirebaseAuth auth;
         textViewGender = findViewById(R.id.textView_show_gender);
         textViewMobile = findViewById(R.id.textView_show_mobile);
        imageView = findViewById(R.id.imageView_profile_dp);
+       progressBar = findViewById(R.id.progress_bar);
+
        imageView.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
@@ -70,6 +77,22 @@ private FirebaseAuth auth;
         }
 
 
+
+    }
+
+    private void swipeTorefresh() {
+        swipeContainer = findViewById(R.id.SwipeContainer);
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                startActivity(getIntent());
+                finish();
+                overridePendingTransition(0,0);
+                swipeContainer.setRefreshing(false);
+            }
+        });
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,android.R.color.holo_blue_light, android.R.color.holo_orange_light, android.R.color.holo_red_light );
 
     }
 
@@ -100,28 +123,31 @@ private FirebaseAuth auth;
     private void showUserProfile(FirebaseUser firebaseUser) {
         String userid = firebaseUser.getUid();
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Registered user");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Register users");
 
         reference.child(userid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 UserDetails userDetails = snapshot.getValue(UserDetails.class);
                 if (userDetails != null){
-                    fullname = firebaseUser.getUid();
-                    email = firebaseUser.getEmail();
+                   fullname = firebaseUser.getDisplayName();
+                   email = firebaseUser.getEmail();
                    dob = userDetails.dob;
                    gender = userDetails.gender;
                    mobile = userDetails.mobile;
 
                    textViewwelcome.setText("welcome,"+fullname+"!");
+                   Toast.makeText(UserProfileActivity.this, "Everything is correct!", Toast.LENGTH_SHORT).show();
+
                    textviewfulname.setText(fullname);
                    textViewemail.setText(email);
                    textViewDob.setText(dob);
                    textViewGender.setText(gender);
+                   textViewMobile.setText(mobile);
 
-                    Uri uri = firebaseUser.getPhotoUrl();
+                    //Uri uri = firebaseUser.getPhotoUrl();
 
-                    Picasso.get().load(uri).into(imageView);
+                    //Picasso.get().load(uri).into(imageView);
 
 
                 }else {
@@ -148,7 +174,8 @@ private FirebaseAuth auth;
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-
+        if (id== android.R.id.home)
+            NavUtils.navigateUpFromSameTask(UserProfileActivity.this);
         if (id == R.id.menu_refresh) {
             startActivity(getIntent());
             finish();
@@ -182,7 +209,7 @@ private FirebaseAuth auth;
             finish();
             
         } else{
-            Toast.makeText(UserProfileActivity.this, "Somthing went Wrong", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UserProfileActivity.this, "Something went Wrong", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);

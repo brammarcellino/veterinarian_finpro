@@ -44,6 +44,7 @@ public class UpdateUserProfileActivity extends AppCompatActivity {
     private ProgressBar progressBar;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,19 +54,21 @@ public class UpdateUserProfileActivity extends AppCompatActivity {
         editTextupdateName = findViewById(R.id.editText_update_profile_name);
         editTextupdatemobile = findViewById(R.id.editText_update_profile_mobile);
         radioGroupGender = findViewById(R.id.radio_group_update_profile_gender);
+        editTextupdateDob = findViewById(R.id.editText_update_profile_dob);
+
         auth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = auth.getCurrentUser();
 
         showProfile(firebaseUser);
-        /*TextView textViewupdateEmail = findViewById(R.id.textView_profile_update_email);
+        TextView textViewupdateEmail = findViewById(R.id.textView_profile_update_email);
         textViewupdateEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(UpdateUserProfileActivity.this,updateEmailActivity.class);
+                Intent intent = new Intent(UpdateUserProfileActivity.this,UpdateEmailActivity.class);
               startActivity(intent);
               finish();
             }
-        });*/
+        });
 
 
         TextView textViewUploadPic = findViewById(R.id.textView_profile_upload_pic);
@@ -84,7 +87,7 @@ public class UpdateUserProfileActivity extends AppCompatActivity {
 
 
                 int day = Integer.parseInt(textSADob[0]);
-                int mounth = Integer.parseInt(textSADob[1]);
+                int mounth = Integer.parseInt(textSADob[1])-1;
                 int year = Integer.parseInt(textSADob[2]);
                 DatePickerDialog picker;
                 picker = new DatePickerDialog(UpdateUserProfileActivity.this, new DatePickerDialog.OnDateSetListener() {
@@ -149,11 +152,12 @@ public class UpdateUserProfileActivity extends AppCompatActivity {
             textfullname = editTextupdateName.getText().toString();
             textDob = editTextupdateDob.getText().toString();
             textMobile = editTextupdatemobile.getText().toString();
-            UserDetails writeuser = new UserDetails(textDob,textMobile,textfullname);
+
+            UserDetails userDetails= new UserDetails(textDob,textMobile,textMobile);
             progressBar.setVisibility(View.VISIBLE);
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Registered Users");
             String userId= firebaseUser.getUid();
-            reference.child(userId).setValue(writeuser).addOnCompleteListener(new OnCompleteListener<Void>() {
+            reference.child(userId).setValue(userDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()){
