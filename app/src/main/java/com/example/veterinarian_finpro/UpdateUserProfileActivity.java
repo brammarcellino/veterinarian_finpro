@@ -153,7 +153,7 @@ public class UpdateUserProfileActivity extends AppCompatActivity {
             textDob = editTextupdateDob.getText().toString();
             textMobile = editTextupdatemobile.getText().toString();
 
-            UserDetails userDetails= new UserDetails(textDob,textMobile,textMobile);
+            UserDetails userDetails= new UserDetails(textDob,textMobile,textMobile,textfullname);
             progressBar.setVisibility(View.VISIBLE);
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Registered Users");
             String userId= firebaseUser.getUid();

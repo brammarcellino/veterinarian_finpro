@@ -43,20 +43,38 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
 
         <Button
-            android:id="@+id/button_login"
+            android:id="@+id/button_loginUser"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/textView_main_head"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
-            android:text="Login" />
+            android:text="Login User " />
+
+        <Button
+            android:id="@+id/button_loginAdmin"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/button_loginUser"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="92dp"
+            android:text="Login Admin" />
+
+        <Button
+            android:id="@+id/button_loginDoctor"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/button_loginAdmin"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:text="Login Doctor" />
 
         <TextView
             android:id="@+id/textView_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/button_login"
-            android:layout_marginTop="30dp"
+            android:layout_below="@id/button_loginUser"
+            android:layout_marginTop="6dp"
             android:text="Do not have an account?"
             android:textAlignment="center" />
 

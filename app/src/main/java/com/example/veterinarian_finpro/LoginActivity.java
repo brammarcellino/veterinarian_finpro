@@ -39,10 +39,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-
-
-        getSupportActionBar().setTitle("Login");
         editTextEmail = findViewById(R.id.editText_login_email);
         edittextpwd = findViewById(R.id.editText_login_pwd);
         progressBar = findViewById(R.id.progressBar);
@@ -181,16 +177,16 @@ public class LoginActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (auth.getCurrentUser()!= null){
-            Toast.makeText(LoginActivity.this, "Already logged in!", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(LoginActivity.this,UserProfileActivity.class));
-        finish();
-        }
-        else  {
-            Toast.makeText(this, "You can login now", Toast.LENGTH_SHORT).show();
-        }
-    }
+  //  @Override
+    //protected void onStart() {
+      //  super.onStart();
+        //if (auth.getCurrentUser()!= null){
+          //  Toast.makeText(LoginActivity.this, "Already logged in!", Toast.LENGTH_SHORT).show();
+        //startActivity(new Intent(LoginActivity.this,HomeActivity.class));
+        //finish();
+        //}
+        //else  {
+         //   Toast.makeText(this, "You can login now", Toast.LENGTH_SHORT).show();
+        //}
+    //}
 }

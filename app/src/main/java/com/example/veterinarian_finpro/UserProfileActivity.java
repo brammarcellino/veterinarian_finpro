@@ -41,7 +41,7 @@ private SwipeRefreshLayout swipeContainer;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-        getSupportActionBar().setTitle("UserProfile");
+
         
         swipeTorefresh();
 
@@ -67,7 +67,7 @@ private SwipeRefreshLayout swipeContainer;
         FirebaseUser firebaseUser = auth.getCurrentUser();
 
         if (firebaseUser==null){
-            Toast.makeText(UserProfileActivity.this, "Somthing went wrong User's details are not avalible at the moment", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UserProfileActivity.this, "Something went wrong User's details are not avalible at the moment", Toast.LENGTH_SHORT).show();
 
 
         }else {

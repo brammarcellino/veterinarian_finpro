@@ -15,13 +15,32 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getSupportActionBar().setTitle("Firebase_data_user");
 
-        Button buttonLogin = findViewById(R.id.button_login);
+
+        Button buttonLogin = findViewById(R.id.button_loginUser);
+        Button buttonLoginDoctor= findViewById(R.id.button_loginDoctor);
+        Button buttonLoginAdmin = findViewById(R.id.button_loginAdmin);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+        buttonLoginDoctor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(MainActivity.this,DoctorsLoginActivity.class);
+                startActivity(intent);
+
+
+            }
+        });
+
+        buttonLoginAdmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent  = new Intent (MainActivity.this,AdminLoginActivity.class);
                 startActivity(intent);
             }
         });
@@ -34,5 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
 }

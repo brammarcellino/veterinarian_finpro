@@ -43,8 +43,7 @@ public class UpdateProfilePictureActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_update_profile_picture);
-        getSupportActionBar().setTitle("upload profile picture");
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         auth = FirebaseAuth.getInstance();
         firebaseUser =auth.getCurrentUser();
         Button buttonloadpicture= findViewById(R.id.upload_pic_choose_button);
@@ -53,7 +52,7 @@ public class UpdateProfilePictureActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         storageReference = FirebaseStorage.getInstance().getReference("DisplayPicUser");
         Uri uri = firebaseUser.getPhotoUrl();
-        Picasso.get().load(uri).fit().into(imageViewPic);
+        Picasso.get().load(uri).into(imageViewPic);
 
 
         buttonloadpicture.setOnClickListener(new View.OnClickListener() {
