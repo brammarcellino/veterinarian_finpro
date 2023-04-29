@@ -42,14 +42,14 @@ public class RegiterActivity extends AppCompatActivity {
     private RadioGroup radioGroupregisterGender;
     private RadioButton radioButtonregitergender;
     private  static  final  String TAG = "RegiterActivity";
-    String textmobile1  = "+62" + getIntent().getStringExtra("mobile");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regiter);
 
-        getSupportActionBar().setTitle("Register");
+
 
         Toast.makeText(RegiterActivity.this, "You can Register now", Toast.LENGTH_SHORT).show();
         progressBar = findViewById(R.id.progressBar);
@@ -65,7 +65,7 @@ public class RegiterActivity extends AppCompatActivity {
 
         EditText editnumber=findViewById(R.id.editText_register_mobile);
         editnumber.setText(String.format(
-                "+91-%s", getIntent().getStringExtra("mobile")
+                "+62-%s", getIntent().getStringExtra("mobile")
         ));
 
 
@@ -213,12 +213,10 @@ public class RegiterActivity extends AppCompatActivity {
                                 firebaseUser.sendEmailVerification();
                                 Toast.makeText(RegiterActivity.this, "User register Successfully .please verivy your email", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(RegiterActivity.this , UserProfileActivity.class);
+                                intent.putExtra("mobile", EditTextRegisterMobile.getText().toString());
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-                                Patient_Phone_No patientPhoneNo = new Patient_Phone_No(textmobile1);
-                                Patient_Session_Management session_management = new Patient_Session_Management(RegiterActivity.this);
-                                session_management.saveSession(patientPhoneNo);
-                                finish();
+                finish();
                             } else  {
                                 Toast.makeText(RegiterActivity.this, "User registered failed .please verify your email", Toast.LENGTH_SHORT).show();
                             progressBar.setVisibility(View.GONE);

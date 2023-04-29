@@ -85,7 +85,7 @@ public class PreviousFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         previous_appt = new ArrayList<>();
-        reference = FirebaseDatabase.getInstance("https://ahujaclinic-86055-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Doctors_Appointments");
+        reference = FirebaseDatabase.getInstance().getReference("Doctors_Appointments");
 //        user = FirebaseAuth.getInstance().getCurrentUser();
 //        email = user.getEmail().replace(".", ",");
         Doctors_Session_Mangement doctors_session_mangement = new Doctors_Session_Mangement(getActivity());

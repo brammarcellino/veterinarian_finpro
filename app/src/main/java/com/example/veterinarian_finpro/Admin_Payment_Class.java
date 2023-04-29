@@ -2,17 +2,17 @@ package com.example.veterinarian_finpro;
 
 public class Admin_Payment_Class {
 
-    private String transaction, dname, phone,name, date, time, email;
-    private int status, payment;
+    private String transaction,dname, mobile,name, date, time, email;
+    private int status,payment;
 
     public Admin_Payment_Class() {
     }
 
-    public Admin_Payment_Class(String transaction, String dname, String email, String phone, String name, int status, String date, String time, int payment) {
+    public Admin_Payment_Class(String transaction, String dname, String email, String mobile, String name, int status, String date, String time, int payment) {
         this.transaction = transaction;
         this.dname = dname;
         this.email = email;
-        this.phone = phone;
+        this.mobile = mobile;
         this.name = name;
         this.status = status;
         this.date = date;
@@ -24,9 +24,9 @@ public class Admin_Payment_Class {
         return transaction;
     }
 
-    public void setTransaction(String transaction) {
-        this.transaction = transaction;
-    }
+    public void setTransaction(String transactionid) {
+        this.transaction = transactionid;
+     }
 
     public String getEmail() {
         return email;
@@ -44,12 +44,12 @@ public class Admin_Payment_Class {
         this.dname = dname;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getMobile() {
+        return mobile;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     public int getStatus() {

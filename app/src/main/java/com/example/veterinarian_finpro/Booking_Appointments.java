@@ -17,7 +17,7 @@ public class Booking_Appointments {
         return mobile;
     }
 
-    public void setmobile(String mobile) {
+    public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 

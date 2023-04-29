@@ -3,13 +3,13 @@ package com.example.veterinarian_finpro;
 public class Patient_Chosen_Slot_Class {
     private String time;
     private int payment,status;
-    private String question,patient_name, transaction_id;
+    private String question,patient_name,transaction_id;
 
 
     public Patient_Chosen_Slot_Class() {
     }
 
-    public Patient_Chosen_Slot_Class(String time, int payment, String question, String patient_name, int status, String transaction_id) {
+    public Patient_Chosen_Slot_Class(String time, int payment, String question, String patient_name, int status,String transaction_id) {
         this.time = time;
         this.payment = payment;
         this.question = question;
@@ -59,11 +59,11 @@ public class Patient_Chosen_Slot_Class {
         this.status = status;
     }
 
-    public String getTransaction_id() {
-        return transaction_id;
+   public String getTransaction_id() {
+       return transaction_id;
     }
 
-    public void setTransaction_id(String transaction_id) {
+   public void setTransaction_id(String transaction_id) {
         this.transaction_id = transaction_id;
     }
 }

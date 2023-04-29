@@ -150,7 +150,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
 
 
-                    Toast.makeText(LoginActivity.this, "Somthing went wrong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                 }
                 progressBar.setVisibility(View.GONE);
 
@@ -162,7 +162,7 @@ public class LoginActivity extends AppCompatActivity {
     private void showAletDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
         builder.setTitle("Email not Verify");
-        builder.setMessage("plese verify your email now .you can not without email verification ");
+        builder.setMessage("please verify your email now .you can not without email verification ");
         builder.setPositiveButton("continue", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

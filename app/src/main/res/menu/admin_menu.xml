@@ -29,16 +29,7 @@
             android:icon="@drawable/ic_add"
             android:title="Add Doctor" />
 
-        <item
-            android:id="@+id/feedback_doc"
-            android:icon="@drawable/ic_feed"
-            android:title="FeedBacks" />
 
-
-        <item
-            android:id="@+id/settingsApp"
-            android:icon="@drawable/ic_setting"
-            android:title="Settings" />
 
 
         <item
@@ -48,31 +39,6 @@
 
     </group>
 
-    <item android:title="Communicate"
-        android:icon="@drawable/ic_communicate">
-
-        <menu>
-
-            <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/website"
-                    android:title="Website"
-                    android:icon="@drawable/ic_communicate"/>
-                <item
-                    android:id="@+id/facebook"
-                    android:title="Facebook"
-                    android:icon="@drawable/ic_communicate"/>
-                <item
-                    android:id="@+id/twitter"
-                    android:title="Twitter"
-                    android:icon="@drawable/ic_communicate"/>
-                <item
-                    android:id="@+id/linkedin"
-                    android:title="Linkedin"
-                    android:icon="@drawable/ic_communicate"/>
-            </group>
-        </menu>
-    </item>
 
 
 </menu>

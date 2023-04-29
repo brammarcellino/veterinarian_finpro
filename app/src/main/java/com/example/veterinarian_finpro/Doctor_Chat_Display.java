@@ -23,12 +23,12 @@ import java.util.List;
 public class Doctor_Chat_Display extends AppCompatActivity {
     private RecyclerView recyclerView;
     private Doctor_UserAdapter doctorUserAdapter;
-    private List<Patient_Details> mUsers;
+    private List<UserDetails> mUsers;
     private DatabaseReference reference, reference_patient;
     private List<String> usersList, status_val;
     private FirebaseUser fuser;
     private String email;
-    private HashSet<Patient_Details> hashSet;
+    private HashSet<UserDetails> hashSet;
     private ArrayList<String> phone_num;
     private TextView chatview;
 
@@ -94,9 +94,9 @@ public class Doctor_Chat_Display extends AppCompatActivity {
                     phone_num = new ArrayList<>();
                     status_val = new ArrayList<>();
                     for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                        Patient_Details details = snapshot1.getValue(Patient_Details.class);
+                        UserDetails details = snapshot1.getValue(UserDetails.class);
                         mUsers.add(details);
-                        phone_num.add(details.getPhone());
+                        phone_num.add(details.getMobile());
                     }
                     reference_patient.addValueEventListener(new ValueEventListener() {
                         @Override

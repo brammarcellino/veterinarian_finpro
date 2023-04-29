@@ -34,7 +34,7 @@ public class Patient_Details_Doctors_Side extends AppCompatActivity {
         pname = (String) getIntent().getSerializableExtra("name");
         Questions = (String) getIntent().getSerializableExtra("Questions");
         phone = (String) getIntent().getSerializableExtra("phone");
-        feedback = FirebaseDatabase.getInstance("").getReference("Doctors_Feedback");
+        feedback = FirebaseDatabase.getInstance().getReference("Doctors_Feedback");
         Quest = findViewById(R.id.detaildesc_ques);
         name = findViewById(R.id.detailhead);
         date_booked = findViewById(R.id.detail_date);

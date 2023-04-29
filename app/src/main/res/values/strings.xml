@@ -20,17 +20,9 @@
         <item>Dog</item>
         <item>Fish</item>
         <item>Bird</item>
-        <item>Tutle</item>
+        /
         <item>Cat</item>
-        <item>Hormone</item>
-        <item>Immunology</item>
-        <item>Rheumatology</item>
-        <item>Neurology</item>
-        <item>Ophthalmology</item>
-        <item>Cardiac Sciences</item>
-        <item>Cancer Care / Oncology</item>
-        <item>Gastroenterology, Hepatology &amp; Endoscopy</item>
-        <item>Ear Nose Throat</item>
+
     </string-array>
 
     <string name="nav_drawer_open">Open Navigation Drawer</string>

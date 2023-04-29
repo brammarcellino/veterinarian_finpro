@@ -352,7 +352,7 @@
             android:background="@drawable/custom_button"
             android:onClick="open_chat"
             android:text="Chat"
-            android:visibility="gone"
+            android:visibility="visible"
             android:textColor="@color/white"
             app:backgroundTint="@null"
             app:layout_constraintBottom_toBottomOf="parent"

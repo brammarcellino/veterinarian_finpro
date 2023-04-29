@@ -35,4 +35,8 @@ public class UserDetails {
     public void setMobile(String mobile) {
         this.mobile = mobile;
     }
+
+    public String getname() {
+        return  name;
+    }
 }

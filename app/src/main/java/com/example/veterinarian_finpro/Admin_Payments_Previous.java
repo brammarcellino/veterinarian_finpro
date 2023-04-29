@@ -85,7 +85,7 @@ public class Admin_Payments_Previous extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         previous_payment = new ArrayList<>();
-        reference = FirebaseDatabase.getInstance("https://ahujaclinic-86055-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Admin_Payment");
+        reference = FirebaseDatabase.getInstance().getReference("Admin_Payment");
         reference.child("Payment1").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

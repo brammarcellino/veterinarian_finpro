@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,7 +51,8 @@ public class Patient_Payment_Appt extends AppCompatActivity {
         fees_show = (TextView) findViewById(R.id.fees);
         pay_app = (Button) findViewById(R.id.book_button);
         paymentLink = (TextView) findViewById(R.id.linkPayment);
-        fees_show.setText("Please Pay Rs. " + fees_val);
+        fees_show.setText("Please Pay Rp. " + fees_val);
+
         paymentLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,15 +65,15 @@ public class Patient_Payment_Appt extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String transactionid = tid.getText().toString().trim();
+               String transactionid = tid.getText().toString().trim();
                 if (transactionid.isEmpty()) {
-                    tid.setError("Transaction ID is a required field");
+                   tid.setError("Transaction ID is a required field");
                     tid.requestFocus();
-                    return;
+                   return;
                 }
-                String finalSlot_val = slot_val;
+               String finalSlot_val = slot_val;
 
-                reference_booking.child(email).child(date_val).child(slot_val).child("count").addValueEventListener(new ValueEventListener() {
+                reference_booking.child(email).child(date_val).child(slot_val).child("Count").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
@@ -81,16 +83,17 @@ public class Patient_Payment_Appt extends AppCompatActivity {
                             //db chose doctor
                             reference_booking.child(email).child(date_val).child(slot_val).child(check).setValue(booking_appointments);
                             reference_booking.child(email).child(date_val).child(finalSlot_val).child("Count").setValue(count);
-                            Patient_Chosen_Slot_Class patient = new Patient_Chosen_Slot_Class(chosen_time, 0, question_data, pname, 0, transactionid);
-                            reference_patient.child(mobile).child(email).child(date_val).child(chosen_time).setValue(patient);
+                            Patient_Chosen_Slot_Class patient = new Patient_Chosen_Slot_Class(chosen_time,0,question_data,pname,0,transactionid);
+                          reference_patient.child(mobile).child(email).child(date_val).child(chosen_time).setValue(patient);
                             reference_doctor.child(email).child("name").addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     if (snapshot.exists()) {
                                         String dname = snapshot.getValue(String.class);
-                                        Admin_Payment_Class payment = new Admin_Payment_Class(transactionid, dname, email, mobile, pname, 0, date_val, chosen_time, 0);
-                                        reference_payment.child("Payment0").child(mobile).child(date_val).child(chosen_time).setValue(payment);
+                                        Admin_Payment_Class payment = new Admin_Payment_Class(transactionid,dname,email,mobile,pname,0,date_val,chosen_time,0);
+                                    reference_payment.child("Payment0").child(mobile).child(date_val).child(chosen_time).setValue(payment);
                                         Toast.makeText(Patient_Payment_Appt.this, "Payment Done! Please Wait for Confirmation!", Toast.LENGTH_LONG).show();
+
                                         startActivity(new Intent(Patient_Payment_Appt.this, HomeActivity.class));
                                     }
                                 }

@@ -90,11 +90,11 @@ public class Admin_Payments_Current extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         current_payment = new ArrayList<>();
         data_payment = new ArrayList<>();
-        reference = FirebaseDatabase.getInstance("https://ahujaclinic-86055-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Admin_Payment");
-        reference_booking = FirebaseDatabase.getInstance("https://ahujaclinic-86055-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Doctors_Chosen_Slots");
-        reference_patient = FirebaseDatabase.getInstance("https://ahujaclinic-86055-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Patient_Chosen_Slots");
-        reference_details = FirebaseDatabase.getInstance("https://ahujaclinic-86055-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Patient_Details");
-        reference_doctor_appt = FirebaseDatabase.getInstance("https://ahujaclinic-86055-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Doctors_Appointments");
+        reference = FirebaseDatabase.getInstance().getReference("Admin_Payment");
+        reference_booking = FirebaseDatabase.getInstance().getReference("Doctors_Chosen_Slots");
+        reference_patient = FirebaseDatabase.getInstance().getReference("Patient_Chosen_Slots");
+        reference_details = FirebaseDatabase.getInstance().getReference("Patient_Details");
+        reference_doctor_appt = FirebaseDatabase.getInstance().getReference("Doctors_Appointments");
 
         reference.child("Payment0").addValueEventListener(new ValueEventListener() {
             @Override
@@ -130,24 +130,24 @@ public class Admin_Payments_Current extends Fragment {
                                             int position = viewHolder.getAdapterPosition();
                                             DataSnapshot data = data_payment.get(position);
                                             Admin_Payment_Class payment_class = current_payment.get(position);
-                                            reference.child("Payment1").child(payment_class.getPhone()).child(payment_class.getDate()).child(payment_class.getTime()).setValue(payment_class);
-                                            reference.child("Payment1").child(payment_class.getPhone()).child(payment_class.getDate()).child(payment_class.getTime()).child("payment").setValue(1);
+                                            reference.child("Payment1").child(payment_class.getMobile()).child(payment_class.getDate()).child(payment_class.getTime()).setValue(payment_class);
+                                            reference.child("Payment1").child(payment_class.getMobile()).child(payment_class.getDate()).child(payment_class.getTime()).child("payment").setValue(1);
                                             data.getRef().removeValue();
-                                            Patient_Details details = new Patient_Details(payment_class.getPhone(), payment_class.getName());
+                                            Patient_Details details = new Patient_Details(payment_class.getMobile(), payment_class.getName());
                                             String encoded_email = payment_class.getEmail().replace(".", ",");
-                                            reference_details.child(encoded_email).child(payment_class.getPhone()).setValue(details);
-                                            reference_patient.child(payment_class.getPhone()).child(encoded_email).child(payment_class.getDate()).child(payment_class.getTime()).child("payment").setValue(1);
-                                            reference_patient.child(payment_class.getPhone()).child(encoded_email).child(payment_class.getDate()).child(payment_class.getTime()).child("question").addListenerForSingleValueEvent(new ValueEventListener() {
+                                            reference_details.child(encoded_email).child(payment_class.getMobile()).setValue(details);
+                                            reference_patient.child(payment_class.getMobile()).child(encoded_email).child(payment_class.getDate()).child(payment_class.getTime()).child("payment").setValue(1);
+                                            reference_patient.child(payment_class.getMobile()).child(encoded_email).child(payment_class.getDate()).child(payment_class.getTime()).child("question").addListenerForSingleValueEvent(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                     String ques = " ";
                                                     if (snapshot.exists()) {
                                                         ques = snapshot.getValue(String.class);
                                                     }
-                                                    Appointment_notif appointment_notif = new Appointment_notif("1", payment_class.getDate(), payment_class.getTime(), ques, payment_class.getPhone(), payment_class.getName());
+                                                    Appointment_notif appointment_notif = new Appointment_notif("1", payment_class.getDate(), payment_class.getTime(), ques, payment_class.getMobile(), payment_class.getName());
                                                     reference_doctor_appt.child(encoded_email).child(payment_class.getDate()).child(payment_class.getTime()).setValue(appointment_notif);
                                                     String check = payment_class.getTime().split(" - ", 5)[0];
-                                                    Booking_Appointments booking = new Booking_Appointments(1, payment_class.getPhone());
+                                                    Booking_Appointments booking = new Booking_Appointments(1, payment_class.getMobile());
                                                     reference_booking.child(encoded_email).child(payment_class.getDate()).addListenerForSingleValueEvent(new ValueEventListener() {
                                                         @Override
                                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -163,7 +163,7 @@ public class Admin_Payments_Current extends Fragment {
                                                                         break;
                                                                     }
                                                                 }
-                                                                reference_booking.child(encoded_email).child(payment_class.getDate()).child(slot_val).child(check).child("phone").setValue(payment_class.getPhone());
+                                                                reference_booking.child(encoded_email).child(payment_class.getDate()).child(slot_val).child(check).child("phone").setValue(payment_class.getMobile());
                                                             }
                                                         }
 
@@ -190,11 +190,11 @@ public class Admin_Payments_Current extends Fragment {
                                             int position = viewHolder.getAdapterPosition();
                                             DataSnapshot data = data_payment.get(position);
                                             Admin_Payment_Class payment_class = current_payment.get(position);
-                                            reference.child("Payment1").child(payment_class.getPhone()).child(payment_class.getDate()).child(payment_class.getTime()).setValue(payment_class);
-                                            reference.child("Payment1").child(payment_class.getPhone()).child(payment_class.getDate()).child(payment_class.getTime()).child("payment").setValue(2);
+                                            reference.child("Payment1").child(payment_class.getMobile()).child(payment_class.getDate()).child(payment_class.getTime()).setValue(payment_class);
+                                            reference.child("Payment1").child(payment_class.getMobile()).child(payment_class.getDate()).child(payment_class.getTime()).child("payment").setValue(2);
                                             data.getRef().removeValue();
                                             String encoded_email = payment_class.getEmail().replace(".", ",");
-                                            reference_patient.child(payment_class.getPhone()).child(encoded_email).child(payment_class.getDate()).child(payment_class.getTime()).child("payment").setValue(2);
+                                            reference_patient.child(payment_class.getMobile()).child(encoded_email).child(payment_class.getDate()).child(payment_class.getTime()).child("payment").setValue(2);
                                             String check = payment_class.getTime().split(" - ", 5)[0];
                                             Booking_Appointments booking = new Booking_Appointments(0, "null");
                                             reference_booking.child(encoded_email).child(payment_class.getDate()).addListenerForSingleValueEvent(new ValueEventListener() {

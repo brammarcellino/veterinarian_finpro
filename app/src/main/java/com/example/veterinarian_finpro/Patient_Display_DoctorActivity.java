@@ -58,7 +58,8 @@ public class Patient_Display_DoctorActivity extends AppCompatActivity {
         reference_booking = FirebaseDatabase.getInstance().getReference("Doctors_Chosen_Slots");
         emailid.setText("Email: " + email);
         //database patient
-        DatabaseReference reference_details = FirebaseDatabase.getInstance().getReference("Patient_Details");
+
+        DatabaseReference reference_details = FirebaseDatabase.getInstance().getReference("Register users");
         reference_details.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -92,7 +93,7 @@ public class Patient_Display_DoctorActivity extends AppCompatActivity {
                     doctor_spec.setText(snapshot.child("type").getValue(String.class));
                     doctor_about.setText(snapshot.child("desc").getValue(String.class));
                     doctor_experience.setText(snapshot.child("experience").getValue(String.class) + " years");
-                    doctor_fee.setText("Rs. " + snapshot.child("fees").getValue(String.class));
+                    doctor_fee.setText("Rp. " + snapshot.child("fees").getValue(String.class));
                     doctor_images = snapshot.child("doc_pic").getValue(Doctor_Images.class);
                     if (doctor_images != null) {
                         Picasso.get().load(doctor_images.getUrl()).into(doctor_image);

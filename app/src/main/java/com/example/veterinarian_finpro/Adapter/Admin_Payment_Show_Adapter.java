@@ -31,7 +31,7 @@ public class Admin_Payment_Show_Adapter extends RecyclerView.Adapter<Admin_Payme
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Admin_Payment_Class p_class = payments.get(position);
-        holder.name.setText(p_class.getName() + ": " +p_class.getPhone());
+        holder.name.setText(p_class.getName() + ": " +p_class.getMobile());
         holder.phone.setText("Transaction ID: "+p_class.getTransaction());
         holder.email.setText("Booked for: "+p_class.getDname());
         holder.date.setText("Date: "+p_class.getDate());

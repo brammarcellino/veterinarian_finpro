@@ -260,7 +260,7 @@ public class Patient_Booking_AppointmentsMainActivity extends AppCompatActivity 
         });
             }
         });
-
+        ///ini funcituon q
         book_app.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

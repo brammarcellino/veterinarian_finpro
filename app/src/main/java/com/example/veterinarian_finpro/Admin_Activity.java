@@ -90,27 +90,6 @@ public class Admin_Activity extends AppCompatActivity {
                     case R.id.Add_doc:
                         startActivity(new Intent(Admin_Activity.this, Admin_addDoctorActivity.class));
                         break;
-                    case R.id.feedback_doc:
-                        startActivity(new Intent(Admin_Activity.this, MainActivity.class));
-                        break;
-
-                    case R.id.settingsApp:
-                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                        intent.setData(Uri.parse("package:" + getApplicationContext().getPackageName()));
-                        startActivity(intent);
-                        break;
-                    case R.id.website:
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("")));
-                        break;
-                    case R.id.facebook:
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("")));
-                        break;
-                    case R.id.twitter:
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("")));
-                        break;
-                    case R.id.linkedin:
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("")));
-                        break;
                     case R.id.logout:
                         Doctors_Session_Mangement doctors_session_mangement = new Doctors_Session_Mangement(Admin_Activity.this);
                         doctors_session_mangement.removeSession();

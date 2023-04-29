@@ -54,6 +54,12 @@ private SwipeRefreshLayout swipeContainer;
        imageView = findViewById(R.id.imageView_profile_dp);
        progressBar = findViewById(R.id.progress_bar);
 
+        TextView textMobile = findViewById(R.id.textView_show_mobile);
+        textMobile.setText(String.format("+62-%s", getIntent().getStringExtra(mobile)
+                ));
+
+
+
        imageView.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
@@ -135,6 +141,15 @@ private SwipeRefreshLayout swipeContainer;
                    dob = userDetails.dob;
                    gender = userDetails.gender;
                    mobile = userDetails.mobile;
+
+
+                   String phone=  mobile = userDetails.mobile;
+                    Patient_Phone_No patientPhoneNo = new  Patient_Phone_No(phone);
+                    Patient_Session_Management session_management = new Patient_Session_Management(UserProfileActivity.this);
+                    session_management.saveSession(patientPhoneNo);
+
+
+
 
                    textViewwelcome.setText("welcome,"+fullname+"!");
                    Toast.makeText(UserProfileActivity.this, "Everything is correct!", Toast.LENGTH_SHORT).show();

@@ -15,12 +15,12 @@ import java.util.List;
 
 public class Doctor_UserAdapter extends RecyclerView.Adapter<Doctor_UserAdapter.ViewHolder> {
     private Context mContext;
-    private List<Patient_Details> mUsers;
+    private List<UserDetails> mUsers;
     private boolean isChat;
     private List<String> status;
 
 
-    public Doctor_UserAdapter(Context mContext, List<Patient_Details> mUsers, List<String> status, boolean isChat) {
+    public Doctor_UserAdapter(Context mContext, List<UserDetails> mUsers, List<String> status, boolean isChat) {
         this.mUsers = mUsers;
         this.mContext = mContext;
         this.status = status;
@@ -37,8 +37,8 @@ public class Doctor_UserAdapter extends RecyclerView.Adapter<Doctor_UserAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Patient_Details detail = mUsers.get(position);
-        String info = detail.getName() + " ("+detail.getPhone()+")";
+        UserDetails detail = mUsers.get(position);
+        String info = detail.getname() + " ("+detail.getMobile()+")";
         holder.username.setText(info);
         holder.profile_image.setImageResource(R.drawable.ic_person1);
         if(isChat && status.size()!=0){
@@ -60,7 +60,7 @@ public class Doctor_UserAdapter extends RecyclerView.Adapter<Doctor_UserAdapter.
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, Doctor_MessageActivity.class);
-                intent.putExtra("phone", detail.getPhone());
+                intent.putExtra("phone", detail.getMobile());
                 holder.itemView.getContext().startActivity(intent);
             }
         });
